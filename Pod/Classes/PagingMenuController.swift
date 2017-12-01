@@ -222,7 +222,11 @@ open class PagingMenuController: UIViewController {
                 menuView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
             case .bottom:
                 // V:[menuView]|
-                menuView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+                if #available(iOS 11.0, *) {
+                    menuView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+                } else {
+                    menuView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+                }
             }
         case .menuView(let menuOptions):
             height = menuOptions.height
